@@ -4,11 +4,17 @@ import "." as A
 Rectangle { id: root
 	property alias text: txtin.text
 	signal edited ()
-	height: txtin.contentHeight
+	height: txtin.height
+	color: theme.input_bg
 	TextInput { id:txtin
 		width: parent.width
-		font.family: "monospace"
-		font.pointSize: 8
+		font.family: theme.font_family
+		font.pointSize: theme.font_point
+		color: theme.input_fg
+		leftPadding: fsize.pad
+		rightPadding: leftPadding
+		topPadding: Math.round(fsize.pad/2)
+		bottomPadding: topPadding
 		onAccepted: {
 			root.edited()
 			focus = false

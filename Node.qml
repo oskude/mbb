@@ -4,8 +4,9 @@ import "." as A
 Rectangle { id:root
 	property string name
 	property string type
-	width:  childrenRect.width
+	width: childrenRect.width
 	height: childrenRect.height
+	color: theme.node_bg
 
 	MouseArea {
 		anchors.fill: parent
@@ -20,6 +21,7 @@ Rectangle { id:root
 			text: root.type
 			width: root.width
 			horizontalAlignment: Text.AlignHCenter
+			color: theme.node_fg
 		}
 		Column { id:inPortsRoot
 			anchors.left: parent.left
@@ -82,7 +84,7 @@ Rectangle { id:root
 			x: root.x,
 			y: root.y,
 			name: root.name,
-			type: root.toString().split("_")[0],
+			type: root.type,
 			inputs: {},
 			outputs: {}
 		}

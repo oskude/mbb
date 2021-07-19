@@ -7,11 +7,39 @@ import "." as A
 Rectangle { id:root
 	width: 320
 	height: 200
-	color: "#4d4d4d"
+	color: theme.window_bg
 	property string filename
+	property var theme: ({
+		font_family: "monospace",
+		font_point: 8,
+		window_bg: "#2d2d2d",
+		canvas_bg: "#1d1d1d",
+		canvas_fg: "white",
+		node_bg: "#3d3d3d",
+		node_fg: "#0d0d0d",
+		port_bg: "transparent",
+		port_fg: "#8d8d8d",
+		input_bg: "#1d1d1d",
+		input_fg: "#7d7d7d",
+		button_bg: "#3d3d3d",
+		button_fg: "#8d8d8d"
+	})
+
+	FontMetrics {
+		id: fsize
+		property int w: maximumCharacterWidth
+		property int pad: Math.round(w/2)
+		font.family: theme.font_family
+		font.pointSize: theme.font_point
+	}
 
 	RowLayout { id:toolbar
-		spacing: 8
+		spacing: fsize.pad
+		anchors.topMargin: fsize.pad
+		anchors.leftMargin: anchors.topMargin
+		anchors.rightMargin: anchors.topMargin
+		anchors.bottomMargin: anchors.topMargin
+		anchors.top: parent.top
 		anchors.left: parent.left
 		anchors.right: parent.right
 		A.Button {
@@ -34,6 +62,7 @@ Rectangle { id:root
 	}
 
 	A.Canvas { id:canvas
+		anchors.topMargin: fsize.pad
 		anchors.top: toolbar.bottom
 		anchors.left: parent.left
 		anchors.right: parent.right

@@ -1,7 +1,8 @@
 import QtQuick 2.15
 import "." as A
 
-Item { id: root
+Rectangle { id: root
+	color: theme.canvas_bg
 
 	Item { id: nodes
 		anchors.fill: parent

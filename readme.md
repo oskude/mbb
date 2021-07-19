@@ -4,13 +4,22 @@ Once upon a time there was a software called [Building Blocks](https://web.archi
 
 ![bb](bb.gif?raw=true)
 
-now, i could ask if i can still buy that software (and hope it works with wine), but instead i got curious if i can create something similar, just for fun!
+now, i could ask if i can still buy that software (and hope it works with wine), but instead i got curious if i can create something similar, just for fun:
+
+![mbb](mbb.png?raw=true)
+
+## Usage
+
+```
+$ ./main.qml -- test.json
+```
 
 ## Features
 
-- simple ui-node implementation?
-- user move nodes
+- simple ui-node code?
+- move ui-nodes
 - load/save patches
+- themes (not yet user loadable)
 
 ## Deps
 
@@ -19,10 +28,10 @@ now, i could ask if i can still buy that software (and hope it works with wine),
 
 ## ToDo
 
-- themes
 - draw link lines
-- user add/del nodes
 - user modify links
 - user modify values
+- user add/del nodes
 - send/receive midi
 - all the ui-nodes
+- user loadable themes
