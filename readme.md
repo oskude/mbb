@@ -9,8 +9,8 @@ now, i could ask if i can still buy that software (and hope it works with wine),
 ## Features
 
 - simple ui-node implementation?
-- programmatically link ports
 - user move nodes
+- load/save patches
 
 ## Deps
 
@@ -19,7 +19,7 @@ now, i could ask if i can still buy that software (and hope it works with wine),
 
 ## ToDo
 
-- load/save
+- themes
 - draw link lines
 - user add/del nodes
 - user modify links

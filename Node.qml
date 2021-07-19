@@ -2,6 +2,8 @@ import QtQuick 2.15
 import "." as A
 
 Rectangle { id:root
+	property string name
+	property string type
 	width:  childrenRect.width
 	height: childrenRect.height
 
@@ -15,7 +17,7 @@ Rectangle { id:root
 
 	Column {
 		A.Text {
-			text: root.toString().split("_")[0]
+			text: root.type
 			width: root.width
 			horizontalAlignment: Text.AlignHCenter
 		}
@@ -62,17 +64,6 @@ Rectangle { id:root
 		}
 	}
 
-	function toggleLink (outPortName, inNodeItem, inPortName) {
-		if (!root.outputCallbacks[outPortName]) {
-			root.outputCallbacks[outPortName] = []
-		}
-		// TODO: remove link if already exists
-		root.outputCallbacks[outPortName].push({
-			node: inNodeItem,
-			port: inPortName
-		})
-	}
-
 	function getPropNames (prefix) {
 		let props = []
 		for (let prop in root) {
@@ -84,5 +75,25 @@ Rectangle { id:root
 			}
 		}
 		return props
+	}
+
+	function exportNode () {
+		let out = {
+			x: root.x,
+			y: root.y,
+			name: root.name,
+			type: root.toString().split("_")[0],
+			inputs: {},
+			outputs: {}
+		}
+		let inames = getPropNames("in$")
+		let onames = getPropNames("out$")
+		for (let iname of inames) {
+			out.inputs[iname] = root[iname]
+		}
+		for (let oname of onames) {
+			out.inputs[oname] = root[oname]
+		}
+		return out
 	}
 }
