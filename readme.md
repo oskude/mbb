@@ -20,6 +20,7 @@ $ ./main.qml -- test.json
 - move ui-nodes
 - load/save patches
 - themes (not yet user loadable)
+- draw link lines
 
 ## Deps
 
@@ -28,7 +29,6 @@ $ ./main.qml -- test.json
 
 ## ToDo
 
-- draw link lines
 - user modify links
 - user modify values
 - user add/del nodes

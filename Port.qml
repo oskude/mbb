@@ -6,6 +6,7 @@ Rectangle { id:root
 	property int value
 	property bool ltr
 	property int pad: Math.round(fsize.pad / 2)
+	property int yoff
 	color: theme.port_bg
 
 	width: childrenRect.width

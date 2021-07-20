@@ -22,7 +22,11 @@ Rectangle { id:root
 		input_bg: "#1d1d1d",
 		input_fg: "#7d7d7d",
 		button_bg: "#3d3d3d",
-		button_fg: "#8d8d8d"
+		button_fg: "#8d8d8d",
+		link_fg: "#4d4d4d",
+		antialias: 8,
+		line_width: 2,
+		line_curve: 20
 	})
 
 	FontMetrics {

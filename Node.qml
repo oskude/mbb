@@ -16,8 +16,9 @@ Rectangle { id:root
 		cursorShape: Qt.SizeAllCursor
 	}
 
+	// TODO: can we construct this so that we dont need Port.yoff?
 	Column {
-		A.Text {
+		A.Text { id:nodeName
 			text: root.type
 			width: root.width
 			horizontalAlignment: Text.AlignHCenter
@@ -32,6 +33,7 @@ Rectangle { id:root
 	}
 
 	property var outputCallbacks: ({})
+	property var portOffsets: ({})
 
 	Component.onCompleted: {
 		let inames = getPropNames("in$")
@@ -41,6 +43,7 @@ Rectangle { id:root
 			let node = comp.createObject(inPortsRoot, {
 				label: iname.replace("in$", ""),
 				value: Qt.binding(()=>root[iname]),
+				yoff: Qt.binding(()=>nodeName.height),
 				ltr: true
 			})
 		}
@@ -50,6 +53,7 @@ Rectangle { id:root
 			let node = comp.createObject(outPortsRoot, {
 				label: oname.replace("out$", ""),
 				value: Qt.binding(()=>root[oname]),
+				yoff: Qt.binding(()=>nodeName.height + inPortsRoot.height),
 				ltr: false
 			})
 			let Oname = oname.charAt(0).toUpperCase() + oname.slice(1)
@@ -77,6 +81,24 @@ Rectangle { id:root
 			}
 		}
 		return props
+	}
+
+	function getPortItem (portName) {
+		if (portName.startsWith("in")) {
+			let label = portName.replace("in$", "")
+			for (let i in inPortsRoot.children) {
+				let port = inPortsRoot.children[i]
+				if (port.label === label)
+					return port
+			}
+		} else {
+			let label = portName.replace("out$", "")
+			for (let i in outPortsRoot.children) {
+				let port = outPortsRoot.children[i]
+				if (port.label === label)
+					return port
+			}
+		}
 	}
 
 	function exportNode () {

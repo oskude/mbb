@@ -1,4 +1,5 @@
 import QtQuick 2.15
+import QtQuick.Shapes 1.15
 import "." as A
 
 Rectangle { id: root
@@ -8,15 +9,32 @@ Rectangle { id: root
 		anchors.fill: parent
 	}
 
+	Shape { id: links
+		anchors.fill: parent
+		layer.enabled: theme.antialias > 0
+		layer.samples: theme.antialias
+	}
+
 	property var linklist: []
 
 	function clearPatch () {
-		linklist = []
 		for (let i in nodes.children) {
 			let node = nodes.children[i]
 			node.destroy()
 		}
-		nodes.children = "" // NOTE: yes we need this too!
+		nodes.children = [] // NOTE: yes we need this too!
+		linklist = []
+		for (let i in links.data) {
+			let link = links.data[i]
+			link.destroy()
+		}
+		links.data = []
+		// TODO: bug? old lines are still on screen, so add a "hidden" one...
+		links.data.push(Qt.createQmlObject(
+			"import QtQuick 2.15; import QtQuick.Shapes 1.15; ShapePath{}",
+			links,
+			"wat"
+		))
 	}
 
 	function importPatch (json) {
@@ -95,5 +113,24 @@ Rectangle { id: root
 			node: inode,
 			port: inPortName
 		})
+		drawLink(onode, outPortName, inode, inPortName)
+	}
+
+	function drawLink (
+		onode,
+		outPortName,
+		inode,
+		inPortName
+	) {
+		let oport = onode.getPortItem(outPortName)
+		let iport = inode.getPortItem(inPortName)
+		let comp = Qt.createComponent("Link.qml")
+		let line = comp.createObject(links, {
+			startX: Qt.binding(()=>onode.x + onode.width),
+			startY: Qt.binding(()=>onode.y + oport.y + oport.yoff + oport.height/2),
+			endX: Qt.binding(()=>inode.x),
+			endY: Qt.binding(()=>inode.y + iport.y + iport.yoff + iport.height/2)
+		})
+		links.data.push(line)
 	}
 }
