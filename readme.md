@@ -6,13 +6,18 @@ Once upon a time there was a software called [Building Blocks](https://web.archi
 
 now, i could ask if i can still buy that software (and hope it works with wine), but instead i got curious if i can create something similar, just for fun:
 
-![mbb](mbb.png?raw=true)
+![mbb](mbb.gif?raw=true)
 
 ## Usage
 
 ```
-$ ./main.qml -- test.json
+$ ./main.qml
 ```
+
+- Right click canvas to toggle block list
+- Right click block to delete
+- Left press blocks and drag to move
+- Left press ports and drag to un/link
 
 ## Features
 
@@ -21,10 +26,9 @@ $ ./main.qml -- test.json
 - load/save patches
 - themes (not yet user loadable)
 - visualize link lines
-- user modify links (drag output <-> input)
-- user modify values (press enter to confirm)
-- user add blocks (right click on canvas)
-- user del blocks (right click on block)
+- user modify links
+- user modify values
+- user add/del blocks
 
 ## Deps
 
@@ -33,6 +37,8 @@ $ ./main.qml -- test.json
 
 ## ToDo
 
+- there are still some bugs with lines after delete...
+  - try to find quickest way to reproduce...
 - send/receive midi
 - all the blocks
 - user loadable themes
