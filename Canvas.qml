@@ -177,6 +177,7 @@ Rectangle { id:root
 
 			// TODO: WRKRND1
 			if (!(l instanceof A.Link)) {
+				newdata.push(l)
 				continue
 			}
 
@@ -203,10 +204,17 @@ Rectangle { id:root
 
 		links.data = newdata
 		// TODO: removing some lines visually show wrong line removed..
-		// TODO: WRKRND2 move the node to update lines...
+		// TODO: WRKRND2 move the nodes to update lines...
 		let meh = findNodeByName(inNodeName)
-		meh.x++
-		meh.x--
+		if (meh) {
+			meh.x++
+			meh.x--
+		}
+		meh = findNodeByName(outNodeName)
+		if (meh) {
+			meh.x++
+			meh.x--
+		}
 	}
 
 	function findInLinkList (outNodeName, outPortName, inNodeName, inPortName) {

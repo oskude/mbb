@@ -16,8 +16,9 @@ $ ./main.qml
 
 - Right click canvas to toggle block list
 - Right click block to delete
-- Left press blocks and drag to move
-- Left press ports and drag to un/link
+- Left click value to edit (enter to accept)
+- Left press block and drag to move
+- Left press port and drag to un/link
 
 ## Features
 
@@ -37,8 +38,6 @@ $ ./main.qml
 
 ## ToDo
 
-- there are still some bugs with lines after delete...
-  - try to find quickest way to reproduce...
 - send/receive midi
 - all the blocks
 - user loadable themes
