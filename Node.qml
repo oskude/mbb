@@ -4,6 +4,7 @@ import "." as A
 Rectangle { id:root
 	property string name
 	property string type
+	signal delme ()
 	width: childrenRect.width
 	height: childrenRect.height
 	color: theme.node_bg
@@ -13,7 +14,13 @@ Rectangle { id:root
 		drag.target: parent
 		drag.smoothed: false
 		drag.threshold: 0
+	}
+
+	MouseArea {
+		anchors.fill: parent
+		acceptedButtons: Qt.RightButton
 		cursorShape: Qt.SizeAllCursor
+		onClicked: root.delme()
 	}
 
 	// TODO: can we construct this so that we dont need Port.yoff?

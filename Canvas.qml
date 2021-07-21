@@ -2,17 +2,40 @@ import QtQuick 2.15
 import QtQuick.Shapes 1.15
 import "." as A
 
-Rectangle { id: root
+Rectangle { id:root
 	color: theme.canvas_bg
+	property int lastNodeId
 
-	Item { id: nodes
+	MouseArea {
+		anchors.fill: parent
+		acceptedButtons: Qt.RightButton
+		onClicked: {
+			blocklist.nodePos = Qt.point(mouseX, mouseY)
+			blocklist.visible = !blocklist.visible
+		}
+	}
+
+	Item { id:nodes
 		anchors.fill: parent
 	}
 
-	Shape { id: links
+	Shape { id:links
 		anchors.fill: parent
 		layer.enabled: theme.antialias > 0
 		layer.samples: theme.antialias
+	}
+
+	A.BlockList { id:blocklist
+		visible: false
+		anchors.bottom: root.bottom
+		anchors.left: root.left
+		anchors.right: root.right
+		onSelected: {
+			root.lastNodeId++
+			newNode.name = "node" + root.lastNodeId
+			addNode(newNode)
+			visible = false
+		}
 	}
 
 	property var linklist: []
@@ -58,11 +81,13 @@ Rectangle { id: root
 		clearPatch()
 
 		for (let node of patch.nodes) {
+			let i = parseInt(node.name.replace("node", ""))
+			if (i > root.lastNodeId) root.lastNodeId = i
 			addNode(node)
 		}
 
 		for (let link of patch.links) {
-			toggleLink(link[0], link[1], link[2], link[3])
+			addLink(link[0], link[1], link[2], link[3])
 		}
 	}
 
@@ -83,6 +108,52 @@ Rectangle { id: root
 	function addNode (opts) {
 		let comp = Qt.createComponent(opts.type+".qml")
 		let node = comp.createObject(nodes, opts)
+		node.onDelme.connect(()=>delNode(node))
+	}
+
+	function delNode (node) {
+		for (let link of linklist.slice()) {
+			if (link[2] === node.name) {
+				delLink(link[0], link[1], link[2], link[3])
+			}
+			if (link[0] === node.name) {
+				undrawLink(link[0], link[1], link[2], link[3])
+			}
+		}
+		node.destroy()
+	}
+
+	function addLink (outNodeName, outPortName, inNodeName, inPortName) {
+		let inode = findNodeByName(inNodeName)
+		let onode = findNodeByName(outNodeName)
+		if (!onode.outputCallbacks[outPortName]) {
+			onode.outputCallbacks[outPortName] = []
+		}
+		onode.outputCallbacks[outPortName].push({
+			node: inode,
+			port: inPortName
+		})
+		linklist.push([outNodeName, outPortName, inNodeName, inPortName])
+		drawLink(onode, outPortName, inode, inPortName)
+	}
+
+	function delLink (outNodeName, outPortName, inNodeName, inPortName) {
+		let lidx = findInLinkList(outNodeName, outPortName, inNodeName, inPortName)
+		if (!lidx) return false
+		let inode = findNodeByName(inNodeName)
+		let onode = findNodeByName(outNodeName)
+		for (let i in onode.outputCallbacks[outPortName]) {
+			let ocb = onode.outputCallbacks[outPortName][i]
+			if (
+				ocb.port === inPortName
+				&& ocb.node === inode
+			) {
+				onode.outputCallbacks[outPortName].splice(i, 1)
+			}
+		}
+		linklist.splice(lidx, 1)
+		undrawLink(outNodeName, outPortName, inNodeName, inPortName)
+		return true
 	}
 
 	function findNodeByName (name) {
@@ -93,30 +164,8 @@ Rectangle { id: root
 	}
 
 	function toggleLink (outNodeName, outPortName, inNodeName, inPortName) {
-		let lidx = findInLinkList(outNodeName, outPortName, inNodeName, inPortName)
-		let inode = findNodeByName(inNodeName)
-		let onode = findNodeByName(outNodeName)
-		if (lidx !== null) {
-			linklist.splice(lidx, 1)
-			for (let i in onode.outputCallbacks[outPortName]) {
-				let ocb = onode.outputCallbacks[outPortName][i]
-				if (ocb.port === inPortName) {
-					onode.outputCallbacks[outPortName].splice(i, 1)
-					break
-				}
-			}
-			undrawLink (outNodeName, outPortName, inNodeName, inPortName)
-		} else {
-			linklist.push([outNodeName, outPortName, inNodeName, inPortName])
-			if (!onode.outputCallbacks[outPortName]) {
-				onode.outputCallbacks[outPortName] = []
-			}
-			onode.outputCallbacks[outPortName].push({
-				node: inode,
-				port: inPortName
-			})
-			drawLink(onode, outPortName, inode, inPortName)
-		}
+		if (!delLink(outNodeName, outPortName, inNodeName, inPortName))
+			addLink(outNodeName, outPortName, inNodeName, inPortName)
 	}
 
 	function undrawLink (outNodeName, outPortName, inNodeName, inPortName) {

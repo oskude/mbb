@@ -21,8 +21,10 @@ $ ./main.qml -- test.json
 - load/save patches
 - themes (not yet user loadable)
 - visualize link lines
-- user modify links
-- user modify values
+- user modify links (drag output <-> input)
+- user modify values (press enter to confirm)
+- user add blocks (right click on canvas)
+- user del blocks (right click on block)
 
 ## Deps
 
@@ -31,7 +33,7 @@ $ ./main.qml -- test.json
 
 ## ToDo
 
-- user add/del blocks
+- disallow in-in and out-out links in ui
 - send/receive midi
 - all the blocks
 - user loadable themes
@@ -84,7 +86,7 @@ A.Node {
 }
 ```
 
-And that's it, all the rest is done automagically :P
+And that's it, all the rest is done automagically :P (Well, cause vanilla QML cannot get directory listings, you have to also manually add the new block to `blocks.json`, to be able to add it through the ui)
 
 > Please note: at the moment i don't have any use case for custom ui items for a block, but i can imagine that we want them at some point...
 
