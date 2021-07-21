@@ -2,6 +2,8 @@ import QtQuick 2.15
 import "." as A
 
 Rectangle { id:root
+	property string node
+	property string name
 	property string label
 	property int value
 	property bool ltr
@@ -20,6 +22,28 @@ Rectangle { id:root
 			color: theme.port_fg
 			leftPadding: root.ltr ? root.pad : 0
 			rightPadding: root.ltr ? 0 : root.pad
+			MouseArea {
+				anchors.fill: parent
+				cursorShape: Qt.DragLinkCursor
+				onPressed: {
+					Drag.active = true
+					Drag.source = root
+				}
+				onReleased: {
+					Drag.hotSpot = Qt.point(mouseX, mouseY)
+					Drag.drop()
+				}
+			}
+			DropArea {
+				anchors.fill: parent
+				onDropped: {
+					if (root.ltr) {
+						toggleLink(drop.source.node, drop.source.name, root.node, root.name)
+					} else {
+						toggleLink(root.node, root.name, drop.source.node, drop.source.name)
+					}
+				}
+			}
 		}
 		A.Text {
 			text: root.value

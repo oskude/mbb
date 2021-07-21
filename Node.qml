@@ -41,6 +41,8 @@ Rectangle { id:root
 		for (let iname of inames) {
 			let comp = Qt.createComponent("Port.qml")
 			let node = comp.createObject(inPortsRoot, {
+				node: root.name,
+				name: iname,
 				label: iname.replace("in$", ""),
 				value: Qt.binding(()=>root[iname]),
 				yoff: Qt.binding(()=>nodeName.height),
@@ -51,6 +53,8 @@ Rectangle { id:root
 			let oname = onames[o]
 			let comp = Qt.createComponent("Port.qml")
 			let node = comp.createObject(outPortsRoot, {
+				node: root.name,
+				name: oname,
 				label: oname.replace("out$", ""),
 				value: Qt.binding(()=>root[oname]),
 				yoff: Qt.binding(()=>nodeName.height + inPortsRoot.height),

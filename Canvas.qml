@@ -29,7 +29,8 @@ Rectangle { id: root
 			link.destroy()
 		}
 		links.data = []
-		// TODO: bug? old lines are still on screen, so add a "hidden" one...
+		// TODO: bug? old lines are still on screen
+		// WRKRND1: add a "hidden" one...
 		links.data.push(Qt.createQmlObject(
 			"import QtQuick 2.15; import QtQuick.Shapes 1.15; ShapePath{}",
 			links,
@@ -91,37 +92,80 @@ Rectangle { id: root
 		}
 	}
 
-	function toggleLink (
-		outNodeName,
-		outPortName,
-		inNodeName,
-		inPortName
-	) {
-		// TODO: remove link if already exists
-		root.linklist.push([
-			outNodeName,
-			outPortName,
-			inNodeName,
-			inPortName
-		])
+	function toggleLink (outNodeName, outPortName, inNodeName, inPortName) {
+		let lidx = findInLinkList(outNodeName, outPortName, inNodeName, inPortName)
 		let inode = findNodeByName(inNodeName)
 		let onode = findNodeByName(outNodeName)
-		if (!onode.outputCallbacks[outPortName]) {
-			onode.outputCallbacks[outPortName] = []
+		if (lidx !== null) {
+			linklist.splice(lidx, 1)
+			for (let i in onode.outputCallbacks[outPortName]) {
+				let ocb = onode.outputCallbacks[outPortName][i]
+				if (ocb.port === inPortName) {
+					onode.outputCallbacks[outPortName].splice(i, 1)
+					break
+				}
+			}
+			undrawLink (outNodeName, outPortName, inNodeName, inPortName)
+		} else {
+			linklist.push([outNodeName, outPortName, inNodeName, inPortName])
+			if (!onode.outputCallbacks[outPortName]) {
+				onode.outputCallbacks[outPortName] = []
+			}
+			onode.outputCallbacks[outPortName].push({
+				node: inode,
+				port: inPortName
+			})
+			drawLink(onode, outPortName, inode, inPortName)
 		}
-		onode.outputCallbacks[outPortName].push({
-			node: inode,
-			port: inPortName
-		})
-		drawLink(onode, outPortName, inode, inPortName)
 	}
 
-	function drawLink (
-		onode,
-		outPortName,
-		inode,
-		inPortName
-	) {
+	function undrawLink (outNodeName, outPortName, inNodeName, inPortName) {
+		// TODO: https://stackoverflow.com/questions/55435098/qml-shape-type-property-data-has-no-method-for-removing-entries
+		// TODO: would all problems go away if we use a repeater?
+		let newdata = []
+		for (let i in links.data) {
+			let l = links.data[i]
+
+			// TODO: WRKRND1
+			if (!(l instanceof A.Link)) {
+				newdata.push(l)
+				continue
+			}
+
+			if (
+				l.link[0] === outNodeName
+				&& l.link[1] === outPortName
+				&& l.link[2] === inNodeName
+				&& l.link[3] === inPortName
+			) {
+				l.destroy()
+			} else {
+				newdata.push(l)
+			}
+		}
+
+		links.data = newdata
+		// TODO: removing some lines visually show wrong line removed..
+		// TODO: WRKRND2 move the node to update lines...
+		let meh = findNodeByName(inNodeName)
+		meh.x++
+		meh.x--
+	}
+
+	function findInLinkList (outNodeName, outPortName, inNodeName, inPortName) {
+		for (let i in linklist) {
+			let l = linklist[i]
+			if (
+				l[0] === outNodeName
+				&& l[1] === outPortName
+				&& l[2] === inNodeName
+				&& l[3] === inPortName
+			) return i
+		}
+		return null
+	}
+
+	function drawLink (onode, outPortName, inode, inPortName) {
 		let oport = onode.getPortItem(outPortName)
 		let iport = inode.getPortItem(inPortName)
 		let comp = Qt.createComponent("Link.qml")
@@ -129,7 +173,8 @@ Rectangle { id: root
 			startX: Qt.binding(()=>onode.x + onode.width),
 			startY: Qt.binding(()=>onode.y + oport.y + oport.yoff + oport.height/2),
 			endX: Qt.binding(()=>inode.x),
-			endY: Qt.binding(()=>inode.y + iport.y + iport.yoff + iport.height/2)
+			endY: Qt.binding(()=>inode.y + iport.y + iport.yoff + iport.height/2),
+			link: [onode.name, outPortName, inode.name, inPortName]
 		})
 		links.data.push(line)
 	}

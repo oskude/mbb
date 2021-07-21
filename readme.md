@@ -21,6 +21,7 @@ $ ./main.qml -- test.json
 - load/save patches
 - themes (not yet user loadable)
 - visualize link lines
+- user modify links
 
 ## Deps
 
@@ -29,12 +30,12 @@ $ ./main.qml -- test.json
 
 ## ToDo
 
-- user modify links
 - user modify values
 - user add/del blocks
 - send/receive midi
 - all the blocks
 - user loadable themes
+- show line when user modifies link
 - update to Qt 6 when KDE does ;P
 
 # Development
