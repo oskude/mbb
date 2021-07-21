@@ -106,7 +106,7 @@ Rectangle { id:root
 	}
 
 	function addNode (opts) {
-		let comp = Qt.createComponent(opts.type+".qml")
+		let comp = Qt.createComponent("../node/"+opts.type+".qml")
 		let node = comp.createObject(nodes, opts)
 		node.onDelme.connect(()=>delNode(node))
 	}

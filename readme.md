@@ -39,7 +39,7 @@ $ ./main.qml
 ## ToDo
 
 - send/receive midi
-- all the blocks
+- implement all the blocks
 - user loadable themes
 - show line when user modifies link
 - should we even store output values to json?
@@ -54,18 +54,18 @@ This documentation assumes you know the [basics of QML](https://doc.qt.io/qt-5/q
 
 ## Block
 
-To create a new block, make a qml file with the name of your block (eg. `Random.qml`) and extend `Node.qml`:
+To create a new block, make a qml file in `node` directory with the name of your block (eg. `node/Random.qml`) and extend `lib/Node.qml`:
 
 ```qml
 import QtQuick 2.15
-import "." as A
+import "../lib" as Lib
 
-A.Node {}
+Lib.Node {}
 ```
 
 Define your inputs and outputs with properties that start with `in$` and `out$`:
 ```qml
-A.Node {
+Lib.Node {
 	property int in$bang
 	property int in$min: 0
 	property int in$max: 3
@@ -75,7 +75,7 @@ A.Node {
 
 Listen for changes in `in$*` properties, and change `out$*` properties:
 ```qml
-A.Node {
+Lib.Node {
 	property int in$bang
 	property int in$min: 0
 	property int in$max: 3

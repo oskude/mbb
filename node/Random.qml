@@ -1,7 +1,7 @@
 import QtQuick 2.15
-import "." as A
+import "../lib" as Lib
 
-A.Node { id:root
+Lib.Node { id:root
 	property int in$bang
 	property int in$min: 0
 	property int in$max: 3

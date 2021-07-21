@@ -2,7 +2,7 @@
 
 import QtQuick 2.15
 import QtQuick.Layouts 1.15
-import "." as A
+import "lib" as Lib
 
 Rectangle { id:root
 	width: 320
@@ -46,26 +46,26 @@ Rectangle { id:root
 		anchors.top: parent.top
 		anchors.left: parent.left
 		anchors.right: parent.right
-		A.Button {
+		Lib.Button {
 			text: "clear"
 			onClicked: canvas.clearPatch()
 		}
-		A.Button {
+		Lib.Button {
 			text: "load"
 			onClicked: loadPatch()
 		}
-		A.Button {
+		Lib.Button {
 			text: "save"
 			onClicked: savePatch()
 		}
-		A.TextInput {
+		Lib.TextInput {
 			text: root.filename
 			onEdited: root.filename = text
 			Layout.fillWidth: true
 		}
 	}
 
-	A.Canvas { id:canvas
+	Lib.Canvas { id:canvas
 		anchors.topMargin: fsize.pad
 		anchors.top: toolbar.bottom
 		anchors.left: parent.left
