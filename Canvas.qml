@@ -77,7 +77,7 @@ Rectangle { id: root
 			out.nodes.push(node.exportNode())
 		}
 
-		return JSON.stringify(out)
+		return JSON.stringify(out, null, "\t")
 	}
 
 	function addNode (opts) {

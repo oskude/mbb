@@ -22,6 +22,7 @@ $ ./main.qml -- test.json
 - themes (not yet user loadable)
 - visualize link lines
 - user modify links
+- user modify values
 
 ## Deps
 
@@ -30,12 +31,12 @@ $ ./main.qml -- test.json
 
 ## ToDo
 
-- user modify values
 - user add/del blocks
 - send/receive midi
 - all the blocks
 - user loadable themes
 - show line when user modifies link
+- should we even store output values to json?
 - update to Qt 6 when KDE does ;P
 
 # Development

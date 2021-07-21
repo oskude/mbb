@@ -5,34 +5,25 @@
 			"y": 20,
 			"name": "node1",
 			"type": "Banger",
-			"inputs": {
-				"in$beat": 120,
-				"out$bang": 7
-			},
-			"outputs": {}
+			"in$beat": 120,
+			"out$bang": 0
 		},
 		{
 			"x": 120,
 			"y": 20,
 			"name": "node2",
 			"type": "Random",
-			"inputs": {
-				"in$bang": 7,
-				"in$min": 0,
-				"in$max": 7,
-				"out$rand": 1
-			},
-			"outputs": {}
+			"in$bang": 0,
+			"in$min": 0,
+			"in$max": 10,
+			"out$rand": 0
 		},
 		{
 			"x": 220,
 			"y": 20,
 			"name": "node3",
 			"type": "NoteOut",
-			"inputs": {
-				"in$note": 1
-			},
-			"outputs": {}
+			"in$note": 0
 		}
 	],
 	"links": [

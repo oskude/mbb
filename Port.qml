@@ -9,6 +9,7 @@ Rectangle { id:root
 	property bool ltr
 	property int pad: Math.round(fsize.pad / 2)
 	property int yoff
+	signal valueEdited(string newValue)
 	color: theme.port_bg
 
 	width: childrenRect.width
@@ -45,11 +46,11 @@ Rectangle { id:root
 				}
 			}
 		}
-		A.Text {
+		A.TextVal {
 			text: root.value
-			color: theme.port_fg
-			leftPadding: root.ltr ? 0 : root.pad
-			rightPadding: root.ltr ? root.pad : 0
+			ltr: root.ltr
+			pad: root.pad
+			onEdited: root.valueEdited(text)
 		}
 	}
 }

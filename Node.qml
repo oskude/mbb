@@ -48,6 +48,8 @@ Rectangle { id:root
 				yoff: Qt.binding(()=>nodeName.height),
 				ltr: true
 			})
+			// TODO: hmm, i dont like this... is there a better way?
+			node.onValueEdited.connect((newValue)=>{root[iname] = newValue})
 		}
 		for (let o in onames) {
 			let oname = onames[o]
@@ -60,6 +62,8 @@ Rectangle { id:root
 				yoff: Qt.binding(()=>nodeName.height + inPortsRoot.height),
 				ltr: false
 			})
+			// TODO: does user even want to change output values?
+			node.onValueEdited.connect((newValue)=>{root[oname] = newValue})
 			let Oname = oname.charAt(0).toUpperCase() + oname.slice(1)
 			root["on"+Oname+"Changed"].connect(function(){
 				if (!root.outputCallbacks[oname]) return
@@ -110,17 +114,15 @@ Rectangle { id:root
 			x: root.x,
 			y: root.y,
 			name: root.name,
-			type: root.type,
-			inputs: {},
-			outputs: {}
+			type: root.type
 		}
 		let inames = getPropNames("in$")
 		let onames = getPropNames("out$")
 		for (let iname of inames) {
-			out.inputs[iname] = root[iname]
+			out[iname] = root[iname]
 		}
 		for (let oname of onames) {
-			out.inputs[oname] = root[oname]
+			out[oname] = root[oname]
 		}
 		return out
 	}
