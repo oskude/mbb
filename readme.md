@@ -33,12 +33,12 @@ $ ./main.qml -- test.json
 
 ## ToDo
 
-- disallow in-in and out-out links in ui
 - send/receive midi
 - all the blocks
 - user loadable themes
 - show line when user modifies link
 - should we even store output values to json?
+- should Drag.keys also affect the mouse cursor?
 - update to Qt 6 when KDE does ;P
 
 # Development

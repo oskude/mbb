@@ -29,6 +29,7 @@ Rectangle { id:root
 				onPressed: {
 					Drag.active = true
 					Drag.source = root
+					Drag.keys = [root.ltr ? "in" : "out"]
 				}
 				onReleased: {
 					Drag.hotSpot = Qt.point(mouseX, mouseY)
@@ -37,6 +38,7 @@ Rectangle { id:root
 			}
 			DropArea {
 				anchors.fill: parent
+				keys: [root.ltr ? "out" : "in"]
 				onDropped: {
 					if (root.ltr) {
 						toggleLink(drop.source.node, drop.source.name, root.node, root.name)
