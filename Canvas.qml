@@ -171,15 +171,12 @@ Rectangle { id:root
 	}
 
 	function undrawLink (outNodeName, outPortName, inNodeName, inPortName) {
-		// TODO: https://stackoverflow.com/questions/55435098/qml-shape-type-property-data-has-no-method-for-removing-entries
-		// TODO: would all problems go away if we use a repeater?
 		let newdata = []
 		for (let i in links.data) {
 			let l = links.data[i]
 
 			// TODO: WRKRND1
 			if (!(l instanceof A.Link)) {
-				newdata.push(l)
 				continue
 			}
 
@@ -193,6 +190,15 @@ Rectangle { id:root
 			} else {
 				newdata.push(l)
 			}
+		}
+
+		// TODO: WRKRND1
+		if (newdata.length <= 0) {
+			newdata.push(Qt.createQmlObject(
+				"import QtQuick 2.15; import QtQuick.Shapes 1.15; ShapePath{}",
+				links,
+				"wat"
+			))
 		}
 
 		links.data = newdata
