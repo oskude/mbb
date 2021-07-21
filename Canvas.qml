@@ -142,13 +142,15 @@ Rectangle { id:root
 		if (!lidx) return false
 		let inode = findNodeByName(inNodeName)
 		let onode = findNodeByName(outNodeName)
-		for (let i in onode.outputCallbacks[outPortName]) {
-			let ocb = onode.outputCallbacks[outPortName][i]
-			if (
-				ocb.port === inPortName
-				&& ocb.node === inode
-			) {
-				onode.outputCallbacks[outPortName].splice(i, 1)
+		if (onode) {
+			for (let i in onode.outputCallbacks[outPortName]) {
+				let ocb = onode.outputCallbacks[outPortName][i]
+				if (
+					ocb.port === inPortName
+					&& ocb.node === inode
+				) {
+					onode.outputCallbacks[outPortName].splice(i, 1)
+				}
 			}
 		}
 		linklist.splice(lidx, 1)
