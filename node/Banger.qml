@@ -9,6 +9,6 @@ Lib.Node { id:root
 		interval: Math.round(60000 / in$beat)
 		running: true
 		repeat: true
-		onTriggered: out$bang++
+		onTriggered: out$bang = !out$bang
 	}
 }
