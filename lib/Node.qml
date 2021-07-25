@@ -27,7 +27,7 @@ Rectangle { id:root
 	Column {
 		A.Text { id:nodeName
 			text: root.type
-			width: root.width
+			width: root.width > contentWidth ? root.width : contentWidth
 			horizontalAlignment: Text.AlignHCenter
 			color: theme.node_fg
 		}
