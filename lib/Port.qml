@@ -11,9 +11,10 @@ Rectangle { id:root
 	property int yoff
 	signal valueEdited(string newValue)
 	color: theme.port_bg
-
 	width: childrenRect.width
 	height: childrenRect.height
+	anchors.left: ltr ? parent.left : undefined
+	anchors.right: ltr ? undefined : parent.right
 
 	Row {
 		spacing: 8
