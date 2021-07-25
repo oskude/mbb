@@ -1,5 +1,9 @@
 [
 	"Banger",
 	"Random",
-	"NoteOut"
+	"LRandom",
+	"InNote",
+	"OutNote",
+	"OutNoteOn",
+	"OutNoteOff"
 ]

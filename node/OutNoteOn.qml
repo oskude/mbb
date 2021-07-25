@@ -2,9 +2,11 @@ import QtQuick 2.15
 import "../lib" as Lib
 
 Lib.Node { id:root
+	property int in$chn
 	property int in$note
+	property int in$velo
 
 	onIn$noteChanged: {
-		console.log("TODO: NoteOut", in$note)
+		midiout.sendMessage(0x90+in$chn, in$note, in$velo)
 	}
 }

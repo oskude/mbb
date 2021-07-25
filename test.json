@@ -1,48 +1,149 @@
 {
 	"nodes": [
 		{
-			"x": 20,
-			"y": 20,
-			"name": "node1",
+			"x": 191,
+			"y": 169,
+			"name": "node2",
+			"type": "OutNote",
+			"in$note": 76,
+			"in$velo": 100,
+			"in$chn": 0,
+			"in$mono": 0,
+			"in$time": 150
+		},
+		{
+			"x": 10,
+			"y": 16,
+			"name": "node3",
 			"type": "Banger",
 			"in$beat": 120,
+			"out$bang": 1
+		},
+		{
+			"x": 24,
+			"y": 75,
+			"name": "node4",
+			"type": "Random",
+			"in$bang": 1,
+			"in$min": 4,
+			"in$max": 8,
+			"out$rand": 6
+		},
+		{
+			"x": 196,
+			"y": 12,
+			"name": "node6",
+			"type": "Banger",
+			"in$beat": 30,
 			"out$bang": 0
 		},
 		{
-			"x": 120,
-			"y": 20,
-			"name": "node2",
+			"x": 200,
+			"y": 71,
+			"name": "node7",
 			"type": "Random",
 			"in$bang": 0,
-			"in$min": 0,
-			"in$max": 10,
-			"out$rand": 0
+			"in$min": 3,
+			"in$max": 4,
+			"out$rand": 4
 		},
 		{
-			"x": 220,
-			"y": 20,
-			"name": "node3",
-			"type": "NoteOut",
-			"in$note": 0
+			"x": 352,
+			"y": 128,
+			"name": "node9",
+			"type": "OutNote",
+			"in$note": 52,
+			"in$velo": 127,
+			"in$chn": 1,
+			"in$mono": 1,
+			"in$time": 100
+		},
+		{
+			"x": 102,
+			"y": 17,
+			"name": "node10",
+			"type": "LRandom",
+			"in$bang": 1,
+			"in$key": 0,
+			"in$oct": 6,
+			"in$len": 4,
+			"in$v1": 0,
+			"in$v2": 4,
+			"in$v3": 7,
+			"in$v4": 11,
+			"in$v5": 0,
+			"in$v6": 0,
+			"in$v7": 0,
+			"in$v8": 0,
+			"out$rand": 76
+		},
+		{
+			"x": 276,
+			"y": 11,
+			"name": "node11",
+			"type": "LRandom",
+			"in$bang": 0,
+			"in$key": 0,
+			"in$oct": 4,
+			"in$len": 4,
+			"in$v1": -1,
+			"in$v2": 0,
+			"in$v3": 2,
+			"in$v4": 4,
+			"in$v5": 0,
+			"in$v6": 0,
+			"in$v7": 0,
+			"in$v8": 0,
+			"out$rand": 52
 		}
 	],
 	"links": [
 		[
-			"node1",
+			"node3",
 			"out$bang",
-			"node2",
+			"node4",
 			"in$bang"
 		],
 		[
-			"node1",
-			"out$bang",
-			"node2",
-			"in$max"
+			"node4",
+			"out$rand",
+			"node10",
+			"in$oct"
 		],
 		[
-			"node2",
-			"out$rand",
 			"node3",
+			"out$bang",
+			"node10",
+			"in$bang"
+		],
+		[
+			"node10",
+			"out$rand",
+			"node2",
+			"in$note"
+		],
+		[
+			"node6",
+			"out$bang",
+			"node7",
+			"in$bang"
+		],
+		[
+			"node7",
+			"out$rand",
+			"node11",
+			"in$oct"
+		],
+		[
+			"node6",
+			"out$bang",
+			"node11",
+			"in$bang"
+		],
+		[
+			"node11",
+			"out$rand",
+			"node9",
 			"in$note"
 		]
 	]

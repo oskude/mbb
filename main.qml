@@ -2,6 +2,7 @@
 
 import QtQuick 2.15
 import QtQuick.Layouts 1.15
+import org.komplex.qmlmidi 1.0
 import "lib" as Lib
 
 Rectangle { id:root
@@ -13,6 +14,7 @@ Rectangle { id:root
 		font_family: "monospace",
 		font_point: 8,
 		window_bg: "#2d2d2d",
+		window_fg: "#7d7d7d",
 		canvas_bg: "#1d1d1d",
 		canvas_fg: "white",
 		node_bg: "#3d3d3d",
@@ -37,13 +39,61 @@ Rectangle { id:root
 		font.pointSize: theme.font_point
 	}
 
-	RowLayout { id:toolbar
+	MidiIn { id:midiin
+		port: 0
+		function prevPort () {
+			if (port > 0) port--
+		}
+		function nextPort () {
+			if (port+1 < portCount) port++
+		}
+		active: true
+	}
+
+	MidiOut { id:midiout
+		port: 0
+		function prevPort () {
+			if (port > 0) port--
+		}
+		function nextPort () {
+			if (port+1 < portCount) port++
+		}
+	}
+
+	Column { id:midibar
 		spacing: fsize.pad
 		anchors.topMargin: fsize.pad
 		anchors.leftMargin: anchors.topMargin
 		anchors.rightMargin: anchors.topMargin
 		anchors.bottomMargin: anchors.topMargin
 		anchors.top: parent.top
+		anchors.left: parent.left
+		anchors.right: parent.right
+		Row {
+			spacing: fsize.pad
+			Lib.Label { text:"▶" }
+			Lib.Button { text:"-"; onClicked:midiin.prevPort() }
+			Lib.Button { text:"+"; onClicked:midiin.nextPort() }
+			Lib.Label { text:midiin.port }
+			Lib.Label { text:midiin.portName }
+		}
+		Row {
+			spacing: fsize.pad
+			Lib.Label { text:"◀" }
+			Lib.Button { text:"-"; onClicked:midiout.prevPort() }
+			Lib.Button { text:"+"; onClicked:midiout.nextPort() }
+			Lib.Label { text:midiout.port }
+			Lib.Label { text:midiout.portName }
+		}
+	}
+
+	RowLayout { id:toolbar
+		spacing: fsize.pad
+		anchors.topMargin: fsize.pad
+		anchors.leftMargin: anchors.topMargin
+		anchors.rightMargin: anchors.topMargin
+		anchors.bottomMargin: anchors.topMargin
+		anchors.top: midibar.bottom
 		anchors.left: parent.left
 		anchors.right: parent.right
 		Lib.Button {
