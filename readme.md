@@ -6,7 +6,7 @@ Once upon a time there was a software called [Building Blocks](https://web.archi
 
 now, i could ask if i can still buy that software (and hope it works with wine), but instead i got curious if i can create something similar, just for fun:
 
-![mbb](mbb.gif?raw=true)
+[![mbb](mbb.png?raw=true)](https://www.youtube.com/watch?v=mLpezpWcWMY)
 
 ## Usage
 
@@ -30,15 +30,16 @@ $ ./main.qml
 - user modify links
 - user modify values
 - user add/del blocks
+- send/receive midi
 
 ## Deps
 
 - qt5-base
 - qt5-declarative
+- [qmlmidi](https://github.com/oskude/qmlmidi)
 
 ## ToDo
 
-- send/receive midi
 - implement all the blocks
 - user loadable themes
 - show line when user modifies link
