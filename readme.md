@@ -93,7 +93,21 @@ Lib.Node {
 
 And that's it, all the rest is done automagically :P (Well, cause vanilla QML cannot get directory listings, you have to also manually add the new block to `blocks.json`, to be able to add it through the ui)
 
-> Please note: at the moment i don't have any use case for custom ui items for a block, but i can imagine that we want them at some point...
+If you want to save/load other values to/from the json file, prefix your properties with `store$`:
+```qml
+Lib.Node {
+	property var store$list: [1,2,3]
+}
+```
+
+If you want to add custom UI for your node, create a component with id `customUI`:
+```qml
+Lib.Node {
+	Component { id:customUI
+		/* your items */
+	}
+}
+```
 
 ## The Magic
 

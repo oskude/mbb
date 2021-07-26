@@ -1,29 +1,45 @@
 {
 	"nodes": [
 		{
-			"x": 20,
-			"y": 20,
+			"x": 14,
+			"y": 14,
 			"name": "node1",
 			"type": "Banger",
 			"in$beat": 120,
 			"out$bang": 0
 		},
 		{
-			"x": 120,
-			"y": 20,
+			"x": 158,
+			"y": 14,
 			"name": "node2",
-			"type": "Random",
+			"type": "LRandom",
 			"in$bang": 0,
-			"in$min": 0,
-			"in$max": 10,
-			"out$rand": 0
+			"in$key": 0,
+			"in$oct": 7,
+			"out$rand": 79,
+			"store$list": [
+				0,
+				4,
+				7,
+				11
+			]
 		},
 		{
-			"x": 220,
-			"y": 20,
+			"x": 236,
+			"y": 13,
 			"name": "node3",
 			"type": "NoteOut",
-			"in$note": 0
+			"in$note": 79
+		},
+		{
+			"x": 92,
+			"y": 13,
+			"name": "node6",
+			"type": "Random",
+			"in$bang": 0,
+			"in$min": 4,
+			"in$max": 8,
+			"out$rand": 7
 		}
 	],
 	"links": [
@@ -34,16 +50,22 @@
 			"in$bang"
 		],
 		[
-			"node1",
-			"out$bang",
-			"node2",
-			"in$max"
-		],
-		[
 			"node2",
 			"out$rand",
 			"node3",
 			"in$note"
+		],
+		[
+			"node1",
+			"out$bang",
+			"node6",
+			"in$bang"
+		],
+		[
+			"node6",
+			"out$rand",
+			"node2",
+			"in$oct"
 		]
 	]
 }
