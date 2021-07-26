@@ -2,5 +2,8 @@
 	"Banger",
 	"Random",
 	"LRandom",
-	"NoteOut"
+	"List",
+	"NoteOut",
+	"Add",
+	"Mul"
 ]
