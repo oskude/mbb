@@ -4,7 +4,7 @@ import "../lib" as Lib
 Lib.Node { id:root
 	property int in$in
 	property int out$out
-	property var store$list: [1, 2, 3]
+	property var store$list: [1, 2, 3, 4]
 
 	Component { id:customUI
 		Column {
