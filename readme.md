@@ -2,7 +2,7 @@
 
 Once upon a time there was a software called [Building Blocks](https://web.archive.org/web/20051102002557/http://www.midiworld.org/users/aureality/products/buildingblocks/buildingblocks.html) by [Paul Swennenhuis](https://soundcloud.com/aureality-1), and i got curious if i can create something similar, just for fun...
 
-![mbb](mbb.png?raw=true)
+[![mbb](mbb.png?raw=true)](https://youtu.be/E3PIo-3iD2w)
 
 ## Usage
 
