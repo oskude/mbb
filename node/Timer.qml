@@ -9,6 +9,7 @@ Lib.Node { id:root
 		interval: Math.round(60000 / in$beat)
 		running: true
 		repeat: true
+		triggeredOnStart: true
 		onTriggered: trigger()
 	}
 
