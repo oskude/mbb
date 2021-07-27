@@ -8,17 +8,17 @@
 			"in$beat": 120,
 			"in$min": 4,
 			"in$max": 8,
-			"out$out": 8
+			"out$out": 0
 		},
 		{
 			"x": 94,
 			"y": 12,
 			"name": "node2",
 			"type": "ListSR",
-			"in$in": 8,
+			"in$in": 5,
 			"in$key": 0,
-			"in$oct": 8,
-			"out$out": 67,
+			"in$oct": 5,
+			"out$out": 0,
 			"store$list": [
 				0,
 				4,
@@ -31,10 +31,9 @@
 			"y": 13,
 			"name": "node3",
 			"type": "OutNote",
-			"in$note": 67,
+			"in$note": 55,
 			"in$velo": 100,
 			"in$chn": 0,
-			"in$mono": 0,
 			"in$time": 150
 		},
 		{
@@ -45,7 +44,7 @@
 			"in$beat": 30,
 			"in$min": 3,
 			"in$max": 4,
-			"out$out": 3
+			"out$out": 0
 		},
 		{
 			"x": 93,
@@ -55,7 +54,7 @@
 			"in$in": 3,
 			"in$key": 0,
 			"in$oct": 3,
-			"out$out": 50,
+			"out$out": 0,
 			"store$list": [
 				-1,
 				0,
@@ -68,11 +67,10 @@
 			"y": 151,
 			"name": "node6",
 			"type": "OutNote",
-			"in$note": 50,
+			"in$note": 38,
 			"in$velo": 100,
 			"in$chn": 1,
-			"in$mono": 1,
-			"in$time": 100
+			"in$time": 0
 		}
 	],
 	"links": [

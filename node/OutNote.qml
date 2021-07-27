@@ -1,35 +1,26 @@
 import QtQuick 2.15
 import "../lib" as Lib
 import "../lib/global.js" as G
+import "." as Node
 
-Lib.Node { id:root
-	property int in$note
-	property int in$velo: 100
-	property int in$chn
-	property int in$mono: 1
-	property int in$time: 100
+Node.OutNoteOn { id:root
+	property int in$time
 
-	property int monoPrevNote: -1
+	property int prevNote: 0
 
-	onIn$noteChanged: {
-		// if mono, note-off previous note
-		if (in$mono > 0) {
-			if (monoPrevNote < 0) {
-				monoPrevNote = in$note
-			} else {
-				midiout.sendMessage(0x80+in$chn, monoPrevNote, 127)
-				monoPrevNote = in$note
-			}
-		}
-		// else start timer for note off
-		else if (in$time > 0) {
+	function noteTrigger () {
+		if (in$chn < 0)
+			return // filter load change
+		if (in$time > 0) {
 			G.delaySendMsg(root, midiout, in$time, [0x80+in$chn, in$note, 127])
-			if (monoPrevNote > 0) {
-				midiout.sendMessage(0x80+in$chn, monoPrevNote, 127)
-				monoPrevNote = -1
+			if (prevNote >= 0) {
+				midiout.sendMessage(0x80+in$chn, prevNote, 127)
+				prevNote = -1
 			}
+		} else {
+			midiout.sendMessage(0x80+in$chn, prevNote, 127)
 		}
-
+		prevNote = in$note
 		midiout.sendMessage(0x90+in$chn, in$note, 127)
 	}
 }
