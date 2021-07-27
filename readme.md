@@ -1,6 +1,6 @@
 # MIDI Building Blocks
 
-Once upon a time there was a software called [Building Blocks](https://web.archive.org/web/20051102002557/http://www.midiworld.org/users/aureality/products/buildingblocks/buildingblocks.html) by [Paul Swennenhuis](https://soundcloud.com/aureality-1), and i got curious if i can create something similar, just for fun:
+Once upon a time there was a software called [Building Blocks](https://web.archive.org/web/20051102002557/http://www.midiworld.org/users/aureality/products/buildingblocks/buildingblocks.html) by [Paul Swennenhuis](https://soundcloud.com/aureality-1), and i got curious if i can create something similar, just for fun...
 
 ![mbb](mbb.png?raw=true)
 

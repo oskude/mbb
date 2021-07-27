@@ -14,4 +14,7 @@ Node.Timer { id:root
 	function reset () {
 		out$out = in$reset
 	}
+
+	// workaround to get first change to 0
+	Component.onCompleted: out$out = -1
 }

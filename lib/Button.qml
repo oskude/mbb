@@ -4,7 +4,7 @@ import "." as A
 Rectangle { id:root
 	property alias text: txt.text
 	signal clicked()
-	color: theme.button_bg
+	color: mouse.pressed ? theme.input_bg : theme.button_bg
 	implicitWidth: txt.width
 	implicitHeight: txt.height
 	A.Text { id:txt
@@ -13,7 +13,7 @@ Rectangle { id:root
 		rightPadding: leftPadding
 		topPadding: Math.round(fsize.pad/2)
 		bottomPadding: topPadding
-		MouseArea {
+		MouseArea { id:mouse
 			anchors.fill: parent
 			onClicked: root.clicked()
 		}
