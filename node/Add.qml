@@ -6,7 +6,10 @@ Lib.Node { id:root
 	property int in$b
 	property int out$o
 
-	onIn$aChanged: {
+	// TODO: https://bugreports.qt.io/browse/QTBUG-95382
+	onIn$aChanged: aTrigger()
+
+	function aTrigger () {
 		let out = in$a + in$b
 		if (out$o === out) out$oChanged()
 		else out$o = out

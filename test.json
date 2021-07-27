@@ -1,22 +1,24 @@
 {
 	"nodes": [
 		{
-			"x": 14,
-			"y": 14,
+			"x": 19,
+			"y": 23,
 			"name": "node1",
-			"type": "Banger",
+			"type": "TimerR",
 			"in$beat": 120,
-			"out$bang": 0
+			"in$min": 4,
+			"in$max": 8,
+			"out$out": 6
 		},
 		{
-			"x": 158,
-			"y": 14,
+			"x": 103,
+			"y": 22,
 			"name": "node2",
-			"type": "LRandom",
-			"in$bang": 0,
+			"type": "ListSR",
+			"in$in": 6,
 			"in$key": 0,
-			"in$oct": 7,
-			"out$rand": 79,
+			"in$oct": 6,
+			"out$out": 96,
 			"store$list": [
 				0,
 				4,
@@ -25,47 +27,31 @@
 			]
 		},
 		{
-			"x": 236,
-			"y": 13,
+			"x": 174,
+			"y": 106,
 			"name": "node3",
 			"type": "NoteOut",
-			"in$note": 79
-		},
-		{
-			"x": 92,
-			"y": 13,
-			"name": "node6",
-			"type": "Random",
-			"in$bang": 0,
-			"in$min": 4,
-			"in$max": 8,
-			"out$rand": 7
+			"in$note": 96
 		}
 	],
 	"links": [
 		[
 			"node1",
-			"out$bang",
+			"out$out",
 			"node2",
-			"in$bang"
-		],
-		[
-			"node2",
-			"out$rand",
-			"node3",
-			"in$note"
+			"in$in"
 		],
 		[
 			"node1",
-			"out$bang",
-			"node6",
-			"in$bang"
-		],
-		[
-			"node6",
-			"out$rand",
+			"out$out",
 			"node2",
 			"in$oct"
+		],
+		[
+			"node2",
+			"out$out",
+			"node3",
+			"in$note"
 		]
 	]
 }

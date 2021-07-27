@@ -6,7 +6,7 @@ import "lib" as Lib
 
 Rectangle { id:root
 	width: 320
-	height: 200
+	height: 240
 	color: theme.window_bg
 	property string filename
 	property var theme: ({

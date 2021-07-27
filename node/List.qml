@@ -2,8 +2,8 @@ import QtQuick 2.15
 import "../lib" as Lib
 
 Lib.Node { id:root
-	property int in$idx
-	property int out$val
+	property int in$in
+	property int out$out
 	property var store$list: [1, 2, 3]
 
 	Component { id:customUI
@@ -40,9 +40,11 @@ Lib.Node { id:root
 		}
 	}
 
-	onIn$idxChanged: {
-		let val = store$list[in$idx]
-		if (out$val === val) out$valChanged()
-		else out$val = val
+	onIn$inChanged: inTrigger()
+
+	function inTrigger() {
+		let out = store$list[in$in % store$list.length]
+		if (out$out === out) out$outChanged()
+		else out$out = out
 	}
 }

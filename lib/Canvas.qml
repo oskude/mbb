@@ -46,6 +46,7 @@ Rectangle { id:root
 			node.destroy()
 		}
 		nodes.children = [] // NOTE: yes we need this too!
+		root.lastNodeId = 0
 		linklist = []
 		for (let i in links.data) {
 			let link = links.data[i]

@@ -1,8 +1,11 @@
 [
-	"Banger",
+	"Timer",
+	"TimerC",
+	"TimerR",
 	"Random",
-	"LRandom",
 	"List",
+	"ListS",
+	"ListSR",
 	"NoteOut",
 	"Add",
 	"Mul"

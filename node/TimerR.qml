@@ -1,13 +1,12 @@
 import QtQuick 2.15
 import "../lib" as Lib
+import "." as Node
 
-Lib.Node { id:root
-	property int in$in
-	property int in$min: 0
-	property int in$max: 3
-	property int out$out
+Node.Timer { id:root
+	property int in$min
+	property int in$max: 4
 
-	onIn$inChanged: {
+	function trigger () {
 		let out = Math.floor(
 			Math.random() * (in$max - in$min + 1) + in$min
 		)

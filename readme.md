@@ -43,6 +43,7 @@ $ ./main.qml
 - user loadable themes
 - show line when user modifies link
 - should we even store output values to json?
+- trigger ports with mouse click?
 - should Drag.keys also affect the mouse cursor?
 - update to Qt 6 when KDE does ;P
 
@@ -51,6 +52,7 @@ $ ./main.qml
 This documentation assumes you know the [basics of QML](https://doc.qt.io/qt-5/qtqml-syntax-basics.html), and:
 
 - [Property change signal handlers](https://doc.qt.io/qt-5/qtqml-syntax-signals.html#property-change-signal-handlers) do not trigger if the value did not change when you set it. so if you still want to trigger a change, call `<property>Changed()`
+- multiple `on<Property>Changed:` definitions for the same property do NOT overwrite the previous ones! (you can call a function from there instead, as functions are overwritten by extenders)
 
 ## Block
 
@@ -108,6 +110,8 @@ Lib.Node {
 	}
 }
 ```
+
+If you want to extend another ui node, and overwrite it's property listeners, you have to use a function workaround, see [`node/Add.qml`](node/Add.qml) and [`node/Mul.qml`](node/Mul.qml) for an example.
 
 ## The Magic
 
