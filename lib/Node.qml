@@ -31,6 +31,13 @@ Rectangle { id:root
 			horizontalAlignment: Text.AlignHCenter
 			color: theme.node_fg
 		}
+		Column { id:aaargh
+			anchors.horizontalCenter: parent.horizontalCenter
+			Loader {
+				// TODO: https://bugreports.qt.io/browse/QTBUG-95377
+				sourceComponent: customUI ?? undefined
+			}
+		}
 		Column { id:inPortsRoot
 			anchors.left: parent.left
 		}
@@ -52,7 +59,7 @@ Rectangle { id:root
 				name: iname,
 				label: iname.replace("in$", ""),
 				value: Qt.binding(()=>root[iname]),
-				yoff: Qt.binding(()=>nodeName.height),
+				yoff: Qt.binding(()=>nodeName.height + aaargh.height),
 				ltr: true
 			})
 			// TODO: hmm, i dont like this... is there a better way?
@@ -66,7 +73,7 @@ Rectangle { id:root
 				name: oname,
 				label: oname.replace("out$", ""),
 				value: Qt.binding(()=>root[oname]),
-				yoff: Qt.binding(()=>nodeName.height + inPortsRoot.height),
+				yoff: Qt.binding(()=>nodeName.height + aaargh.height + inPortsRoot.height),
 				ltr: false
 			})
 			// TODO: does user even want to change output values?
@@ -125,11 +132,15 @@ Rectangle { id:root
 		}
 		let inames = getPropNames("in$")
 		let onames = getPropNames("out$")
+		let snames = getPropNames("store$")
 		for (let iname of inames) {
 			out[iname] = root[iname]
 		}
 		for (let oname of onames) {
 			out[oname] = root[oname]
+		}
+		for (let sname of snames) {
+			out[sname] = root[sname]
 		}
 		return out
 	}

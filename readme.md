@@ -1,12 +1,8 @@
 # MIDI Building Blocks
 
-Once upon a time there was a software called [Building Blocks](https://web.archive.org/web/20051102002557/http://www.midiworld.org/users/aureality/products/buildingblocks/buildingblocks.html) by [Paul Swennenhuis](https://soundcloud.com/aureality-1), and one of my fun play sessions with it looked like this:
+Once upon a time there was a software called [Building Blocks](https://web.archive.org/web/20051102002557/http://www.midiworld.org/users/aureality/products/buildingblocks/buildingblocks.html) by [Paul Swennenhuis](https://soundcloud.com/aureality-1), and i got curious if i can create something similar, just for fun:
 
-[![bb](bb.gif?raw=true)](https://osku.de/music/innerscape-betalive2.mp3)
-
-now, i could ask if i can still buy that software (and hope it works with wine), but instead i got curious if i can create something similar, just for fun:
-
-[![mbb](mbb.png?raw=true)](https://www.youtube.com/watch?v=mLpezpWcWMY)
+![mbb](mbb.png?raw=true)
 
 ## Usage
 
@@ -44,6 +40,7 @@ $ ./main.qml
 - user loadable themes
 - show line when user modifies link
 - should we even store output values to json?
+- trigger ports with mouse click?
 - should Drag.keys also affect the mouse cursor?
 - update to Qt 6 when KDE does ;P
 
@@ -52,6 +49,7 @@ $ ./main.qml
 This documentation assumes you know the [basics of QML](https://doc.qt.io/qt-5/qtqml-syntax-basics.html), and:
 
 - [Property change signal handlers](https://doc.qt.io/qt-5/qtqml-syntax-signals.html#property-change-signal-handlers) do not trigger if the value did not change when you set it. so if you still want to trigger a change, call `<property>Changed()`
+- multiple `on<Property>Changed:` definitions for the same property do NOT overwrite the previous ones! (you can call a function from there instead, as functions are overwritten by extenders)
 
 ## Block
 
@@ -94,7 +92,23 @@ Lib.Node {
 
 And that's it, all the rest is done automagically :P (Well, cause vanilla QML cannot get directory listings, you have to also manually add the new block to `blocks.json`, to be able to add it through the ui)
 
-> Please note: at the moment i don't have any use case for custom ui items for a block, but i can imagine that we want them at some point...
+If you want to save/load other values to/from the json file, prefix your properties with `store$`:
+```qml
+Lib.Node {
+	property var store$list: [1,2,3]
+}
+```
+
+If you want to add custom UI for your node, create a component with id `customUI`:
+```qml
+Lib.Node {
+	Component { id:customUI
+		/* your items */
+	}
+}
+```
+
+If you want to extend another ui node, and overwrite it's property listeners, you have to use a function workaround, see [`node/Add.qml`](node/Add.qml) and [`node/Mul.qml`](node/Mul.qml) for an example.
 
 ## The Magic
 

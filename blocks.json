@@ -1,9 +1,15 @@
 [
-	"Banger",
+	"Timer",
+	"TimerC",
+	"TimerR",
 	"Random",
-	"LRandom",
+	"List",
+	"ListS",
+	"ListSR",
+	"Add",
+	"Mul",
 	"InNote",
 	"OutNote",
-	"OutNoteOn",
-	"OutNoteOff"
+	"OutNoteOff",
+	"OutNoteOn"
 ]
