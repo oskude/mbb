@@ -137,7 +137,7 @@ Rectangle { id:root
 			out[iname] = root[iname]
 		}
 		for (let oname of onames) {
-			out[oname] = root[oname]
+			out[oname] = 0
 		}
 		for (let sname of snames) {
 			out[sname] = root[sname]

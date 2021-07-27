@@ -39,7 +39,6 @@ $ ./main.qml
 - implement all the blocks
 - user loadable themes
 - show line when user modifies link
-- should we even store output values to json?
 - trigger ports with mouse click?
 - should Drag.keys also affect the mouse cursor?
 - update to Qt 6 when KDE does ;P
