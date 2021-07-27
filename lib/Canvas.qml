@@ -114,10 +114,8 @@ Rectangle { id:root
 
 	function delNode (node) {
 		for (let link of linklist.slice()) {
-			if (link[2] === node.name) {
+			if (link[0] === node.name || link[2] == node.name) {
 				delLink(link[0], link[1], link[2], link[3])
-			}
-			if (link[0] === node.name) {
 				undrawLink(link[0], link[1], link[2], link[3])
 			}
 		}
@@ -140,7 +138,7 @@ Rectangle { id:root
 
 	function delLink (outNodeName, outPortName, inNodeName, inPortName) {
 		let lidx = findInLinkList(outNodeName, outPortName, inNodeName, inPortName)
-		if (!lidx) return false
+		if (lidx === null) return false
 		let inode = findNodeByName(inNodeName)
 		let onode = findNodeByName(outNodeName)
 		if (onode) {
@@ -205,16 +203,11 @@ Rectangle { id:root
 
 		links.data = newdata
 		// TODO: removing some lines visually show wrong line removed..
-		// TODO: WRKRND2 move the nodes to update lines...
-		let meh = findNodeByName(inNodeName)
-		if (meh) {
-			meh.x++
-			meh.x--
-		}
-		meh = findNodeByName(outNodeName)
-		if (meh) {
-			meh.x++
-			meh.x--
+		// TODO: WRKRND2 move all the nodes to update the visuals...
+		for (let i in nodes.children) {
+			let node = nodes.children[i]
+			node.x++
+			node.x--
 		}
 	}
 
