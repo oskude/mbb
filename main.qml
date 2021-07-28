@@ -24,6 +24,7 @@ Rectangle { id:root
 		button_bg: "#3d3d3d",
 		button_fg: "#8d8d8d",
 		link_fg: "#4d4d4d",
+		draglink_fg: "#8d8d8d",
 		antialias: 8,
 		line_width: 2,
 		line_curve: 20

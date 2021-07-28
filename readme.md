@@ -38,7 +38,6 @@ $ ./main.qml
 - send/receive midi
 - implement all the blocks
 - user loadable themes
-- show line when user modifies link
 - trigger ports with mouse click?
 - should Drag.keys also affect the mouse cursor?
 - update to Qt 6 when KDE does ;P
