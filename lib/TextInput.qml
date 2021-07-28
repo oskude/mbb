@@ -15,7 +15,7 @@ Rectangle { id: root
 		rightPadding: leftPadding
 		topPadding: Math.round(fsize.pad/2)
 		bottomPadding: topPadding
-		onAccepted: {
+		onEditingFinished: {
 			root.edited()
 			focus = false
 		}
