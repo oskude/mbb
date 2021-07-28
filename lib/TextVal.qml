@@ -15,6 +15,8 @@ FocusScope { id:root
 		TextInput { id:txt
 			anchors.horizontalCenter: parent.horizontalCenter
 			color: root.activeFocus ? theme.input_fg : theme.port_fg
+			selectedTextColor: theme.input_sel_fg
+			selectionColor: theme.input_sel_bg
 			leftPadding: root.ltr ? 0 : root.pad
 			rightPadding: root.ltr ? root.pad : 0
 			font.family: theme.font_family

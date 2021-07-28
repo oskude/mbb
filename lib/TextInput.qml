@@ -11,10 +11,13 @@ Rectangle { id: root
 		font.family: theme.font_family
 		font.pointSize: theme.font_point
 		color: theme.input_fg
+		selectedTextColor: theme.input_sel_fg
+		selectionColor: theme.input_sel_bg
 		leftPadding: fsize.pad
 		rightPadding: leftPadding
 		topPadding: Math.round(fsize.pad/2)
 		bottomPadding: topPadding
+		selectByMouse: true
 		onEditingFinished: {
 			root.edited()
 			focus = false
