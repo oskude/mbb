@@ -10,7 +10,10 @@ Rectangle { id:root
 		anchors.fill: parent
 		acceptedButtons: Qt.RightButton
 		onClicked: {
-			blocklist.nodePos = Qt.point(mouseX, mouseY)
+			let h = root.height - mouse.y
+			let min = root.height - blocklist.height
+			blocklist.nodePos = Qt.point(mouse.x, mouse.y)
+			blocklist.y = mouse.y > min ? min : mouse.y
 			blocklist.visible = !blocklist.visible
 		}
 	}
@@ -25,9 +28,29 @@ Rectangle { id:root
 		layer.samples: theme.antialias
 	}
 
+	Shape { id:dragLink
+		anchors.fill: parent
+		visible: false
+		layer.enabled: theme.antialias > 0
+		layer.samples: theme.antialias
+		A.Link {
+			startX: dragLinkLeft.x
+			startY: dragLinkLeft.y
+			endX: dragLinkRight.x
+			endY: dragLinkRight.y
+			strokeColor: theme.draglink_fg
+		}
+	}
+	Item { id:dragLinkLeft
+		x:0; y:0; width:1; height:1
+	}
+	Item { id:dragLinkRight
+		x:0; y:0; width:1; height:1
+	}
+
 	A.BlockList { id:blocklist
 		visible: false
-		anchors.bottom: root.bottom
+		y: root.height - height
 		anchors.left: root.left
 		anchors.right: root.right
 		onSelected: {

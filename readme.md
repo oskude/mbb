@@ -12,9 +12,10 @@ $ ./main.qml
 
 - Right click canvas to toggle block list
 - Right click block to delete
-- Left click value to edit (enter to accept)
+- Left click value to edit
 - Left press block and drag to move
 - Left press port and drag to un/link
+- [Tab] key to jump throgh value inputs
 
 ## Features
 
@@ -38,7 +39,6 @@ $ ./main.qml
 
 - implement all the blocks
 - user loadable themes
-- show line when user modifies link
 - trigger ports with mouse click?
 - should Drag.keys also affect the mouse cursor?
 - update to Qt 6 when KDE does ;P

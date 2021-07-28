@@ -23,9 +23,12 @@ Rectangle { id:root
 		port_fg: "#8d8d8d",
 		input_bg: "#1d1d1d",
 		input_fg: "#7d7d7d",
+		input_sel_bg: "#7d7d7d",
+		input_sel_fg: "#1d1d1d",
 		button_bg: "#3d3d3d",
 		button_fg: "#8d8d8d",
 		link_fg: "#4d4d4d",
+		draglink_fg: "#8d8d8d",
 		antialias: 8,
 		line_width: 2,
 		line_curve: 20

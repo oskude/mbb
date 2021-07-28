@@ -27,12 +27,31 @@ Rectangle { id:root
 			MouseArea {
 				anchors.fill: parent
 				cursorShape: Qt.DragLinkCursor
+				drag.smoothed: false
+				drag.threshold: 0
+				drag.target: root.ltr ? dragLinkLeft : dragLinkRight
 				onPressed: {
+					dragLink.visible = true
+					let mp = mapToItem(canvas, mouse.x, mouse.y)
+					// TODO: do not use .parent.parent!
+					let rp = mapToItem(canvas, root.parent.parent.x, root.parent.parent.y)
+					if (root.ltr) {
+						dragLinkRight.x = rp.x
+						dragLinkRight.y = rp.y + (root.height/2)
+						dragLinkLeft.x = mp.x
+						dragLinkLeft.y = mp.y
+					} else {
+						dragLinkLeft.x = rp.x + width
+						dragLinkLeft.y = rp.y + (root.height/2)
+						dragLinkRight.x = mp.x
+						dragLinkRight.y = mp.y
+					}
 					Drag.active = true
 					Drag.source = root
 					Drag.keys = [root.ltr ? "in" : "out"]
 				}
 				onReleased: {
+					dragLink.visible = false
 					Drag.hotSpot = Qt.point(mouseX, mouseY)
 					Drag.drop()
 				}
