@@ -15,7 +15,7 @@ $ ./main.qml
 - Left click value to edit
 - Left press block and drag to move
 - Left press port and drag to un/link
-- `[Tab]` key to jump throgh value inputs
+- [Tab] key to jump throgh value inputs
 
 ## Features
 

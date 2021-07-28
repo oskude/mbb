@@ -10,7 +10,10 @@ Rectangle { id:root
 		anchors.fill: parent
 		acceptedButtons: Qt.RightButton
 		onClicked: {
-			blocklist.nodePos = Qt.point(mouseX, mouseY)
+			let h = root.height - mouse.y
+			let min = root.height - blocklist.height
+			blocklist.nodePos = Qt.point(mouse.x, mouse.y)
+			blocklist.y = mouse.y > min ? min : mouse.y
 			blocklist.visible = !blocklist.visible
 		}
 	}
@@ -47,7 +50,7 @@ Rectangle { id:root
 
 	A.BlockList { id:blocklist
 		visible: false
-		anchors.bottom: root.bottom
+		y: root.height - height
 		anchors.left: root.left
 		anchors.right: root.right
 		onSelected: {

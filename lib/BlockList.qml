@@ -6,7 +6,7 @@ Rectangle { id:root
 	property point nodePos
 	signal selected(var newNode)
 	color: theme.window_bg
-	height: childrenRect.height
+	implicitHeight: childrenRect.height
 
 	Flow {
 		width: root.width
