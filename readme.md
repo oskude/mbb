@@ -98,10 +98,10 @@ Lib.Node {
 }
 ```
 
-If you want to add custom UI for your node, create a component with id `customUI`:
+If you want to add custom UI for your node, add a `customUI` component:
 ```qml
 Lib.Node {
-	Component { id:customUI
+	customUI: Component {
 		/* your items */
 	}
 }

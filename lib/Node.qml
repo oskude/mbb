@@ -4,6 +4,7 @@ import "." as A
 Rectangle { id:root
 	property string name
 	property string type
+	property Component customUI
 	signal delme ()
 	width: childrenRect.width
 	height: childrenRect.height
@@ -33,10 +34,7 @@ Rectangle { id:root
 		}
 		Column { id:aaargh
 			anchors.horizontalCenter: parent.horizontalCenter
-			Loader {
-				// TODO: https://bugreports.qt.io/browse/QTBUG-95377
-				sourceComponent: customUI ?? undefined
-			}
+			Loader { sourceComponent:customUI }
 		}
 		Column { id:inPortsRoot
 			anchors.left: parent.left
