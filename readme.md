@@ -35,7 +35,7 @@ $ ./main.qml
 
 ## ToDo
 
-- send/receive midi
+- send/receive midi (see [qmlmidi](https://github.com/oskude/mbb/tree/qmlmidi) branch)
 - implement all the blocks
 - user loadable themes
 - trigger ports with mouse click?
@@ -97,10 +97,10 @@ Lib.Node {
 }
 ```
 
-If you want to add custom UI for your node, create a component with id `customUI`:
+If you want to add custom UI for your node, add a `customUI` component:
 ```qml
 Lib.Node {
-	Component { id:customUI
+	customUI: Component {
 		/* your items */
 	}
 }

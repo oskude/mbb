@@ -6,7 +6,7 @@ Lib.Node { id:root
 	property int out$out
 	property var store$list: [1, 2, 3, 4]
 
-	Component { id:customUI
+	customUI: Component {
 		Column {
 			Row {
 				spacing: fsize.pad
