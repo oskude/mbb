@@ -6,7 +6,6 @@ Lib.Node { id:root
 	property int in$b
 	property int out$o
 
-	// TODO: https://bugreports.qt.io/browse/QTBUG-95382
 	onIn$aChanged: aTrigger()
 
 	function aTrigger () {
